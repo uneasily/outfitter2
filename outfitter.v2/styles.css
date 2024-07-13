@@ -1,0 +1,262 @@
+/* Preloader */
+#preloader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: #ffffff; /* White background for preloader */
+    display: flex;
+    flex-direction: column; /* Stack progress bar and content vertically */
+    justify-content: center;
+    align-items: center;
+    z-index: 9999; /* Ensure it is on top of everything */
+}
+
+#progress-bar-container {
+    width: 100%; /* Full width of the viewport */
+    max-width: 800px; /* Optional: max width for large screens */
+    padding: 0 16px; /* Padding on the sides */
+}
+
+#progress-bar {
+    width: 100%; /* Full width of the container */
+    height: 4px;
+    background-color: #d0d0d0; /* Progress bar background color */
+    border-radius: 2px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2); /* Optional: add shadow for better visibility */
+}
+
+#progress-bar::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background-color: #4caf50; /* Progress bar color */
+    animation: progress 2s linear infinite;
+}
+
+@keyframes progress {
+    0% {
+        left: -100%;
+    }
+    100% {
+        left: 100%;
+    }
+}
+
+/* Main styles */
+body {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #ffffff; /* Background white */
+}
+
+#mainframe {
+    width: 66.67vw;  /* 2/3 of the viewport width */
+    height: 66.67vh; /* 2/3 of the viewport height */
+    background-color: #f0f0f0; /* A few shades down from white */
+    border-radius: 8px; /* 8px rounding of the corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional: a slight shadow for better visibility */
+    display: flex;
+    position: relative; /* Add relative positioning for the content-frame */
+    opacity: 0; /* Hidden initially */
+    transition: opacity 1s ease-in-out; /* Fade-in transition */
+}
+
+#sidebar {
+    width: calc(66.67vw / 16); /* 1/16th of the mainframe width */
+    background-color: #e0e0e0; /* A few shades down from the mainframe color */
+    border-top-left-radius: 8px; /* Match the mainframe corner rounding */
+    border-bottom-left-radius: 8px; /* Match the mainframe corner rounding */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 8px 0; /* Add some padding to the top and bottom */
+}
+
+.sidebar-button {
+    width: calc((66.67vw / 16) - 16px); /* Sidebar width minus 16px */
+    height: calc((66.67vw / 16) - 16px); /* Sidebar width minus 16px for height */
+    background-color: #d0d0d0; /* Slightly darker than the sidebar */
+    border-radius: 4px; /* 4px border-radius */
+    border: none; /* Remove default button border */
+    margin-bottom: 8px; /* 8px spacing between buttons */
+}
+
+.sidebar-button i {
+    font-size: 24px;
+    color: #333;
+}
+
+.sidebar-button:last-child {
+    margin-bottom: 0; /* Remove margin from the last button */
+}
+
+#content-frame {
+    width: calc((66.67vw * 15 / 16)); /* 15/16ths of the mainframe width */
+    height: 100%; /* Full height of the mainframe */
+    background-color: #f0f0f0; /* Same color as the mainframe */
+    border-radius: 8px; /* Match the mainframe corner rounding */
+    position: absolute; /* Absolute positioning relative to the mainframe */
+    left: calc(66.67vw / 16); /* 1/16th of the mainframe width to the right */
+}
+
+#popup {
+    display: none; /* Hidden by default */
+    position: absolute; /* Absolute positioning relative to the mainframe */
+    left: 50%; /* Center horizontally */
+    top: 50%; /* Center vertically */
+    transform: translate(-50%, -50%); /* Adjust for centering */
+    width: calc((66.67vw / 3)); /* 1/3rd of the mainframe width */
+    height: calc((66.67vh / 3)); /* 1/3rd of the mainframe height */
+    background-color: #ffffff; /* White background for the popup */
+    border-radius: 8px; /* 8px border-radius */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Optional: a slight shadow for better visibility */
+    z-index: 100; /* Ensure the popup is on top */
+}
+
+#topbar {
+    width: 100%; /* Full width of the popup */
+    height: calc((66.67vh / 3) / 8); /* 1/8th of the popup height */
+    background-color: #f0f0f0; /* Same color as the mainframe */
+    border-top-left-radius: 8px; /* Match the popup border-radius */
+    border-top-right-radius: 8px; /* Match the popup border-radius */
+    display: flex;
+    justify-content: flex-end; /* Align close button to the right */
+    align-items: center; /* Center the button vertically */
+    padding: 0 8px; /* Add some padding */
+    box-sizing: border-box; /* Include padding in the width/height calculation */
+}
+
+#close-popup {
+    width: calc((66.67vh / 3) / 8 / 2); /* Half the height of the topbar */
+    height: calc((66.67vh / 3) / 8 / 2); /* Same size as the width */
+    background-color: #ff5f56; /* macOS close button color */
+    border-radius: 50%; /* Circle shape */
+    border: none; /* Remove default button border */
+    cursor: pointer; /* Pointer cursor on hover */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box; /* Include padding in the width/height calculation */
+}
+
+#close-popup::before {
+    width: 12px; /* Red dot size */
+    height: 12px; /* Red dot size */
+    background-color: #ffffff; /* White dot */
+    border-radius: 50%; /* Circle shape */
+}
+
+/* Popup Content */
+#popup-content {
+    padding: 16px; /* Add some padding for the content */
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center content horizontally */
+    font-weight: 600; /* Make the text bold */
+}
+
+#dropdown, #popup-button {
+    width: 100%; /* Full width */
+    margin-bottom: 10px; /* Space between elements */
+    padding: 10px;
+    font-weight: 600; /* Make the text bold */
+}
+
+#dropdown {
+    height: 38px; /* Dropdown height */
+    background-color: #ffffff; /* White background */
+    border: 1px solid #d0d0d0; /* Border color */
+    border-radius: 8px; /* Match the popup's border-radius */
+    box-sizing: border-box; /* Include padding in the width calculation */
+}
+
+#popup-button {
+    height: 32px; /* Button height */
+    background-color: #4caf50; /* Button background color */
+    color: #fff; /* Button text color */
+    border: none; /* Remove default button border */
+    border-radius: 8px; /* Match the popup's border-radius */
+    cursor: pointer; /* Pointer cursor on hover */
+    box-sizing: border-box; /* Include padding in the width/height calculation */
+}
+
+/* Non-draggable frame */
+.frame {
+    position: absolute;
+    background-color: #f0f0f0; /* Same color as the content frame */
+    border-radius: 8px; /* Match the popup's border-radius */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Shadow for visibility */
+    width: 150px; /* Fixed width for the frame */
+    height: 200px; /* Fixed height for the frame */
+    overflow: hidden; /* Hide overflowed content */
+    box-sizing: border-box;
+}
+
+/* Images in the frames */
+.frame img {
+    width: 100%; /* Scale image to the width of the frame */
+    height: auto; /* Maintain aspect ratio */
+}
+
+/* Checkbox styles */
+.frame .checkbox {
+    position: absolute;
+    top: 8px; /* 8px from the top */
+    left: 8px; /* 8px from the left */
+    width: 16px; /* Checkbox width */
+    height: 16px; /* Checkbox height */
+    background-color: #ffffff; /* White background */
+    border: 1px solid #000000; /* Black border */
+    border-radius: 4px; /* 4px border-radius */
+    cursor: pointer; /* Pointer cursor on hover */
+    display: none; /* Hide by default */
+    justify-content: center;
+    align-items: center;
+    transition: background-color 0.2s ease; /* Smooth transition for the background color */
+}
+
+/* Checkbox checked state */
+.frame .checkbox.checked {
+    background-color: #000000; /* Black background */
+}
+
+/* Checkbox pseudo-element for the checkmark */
+.frame .checkbox::after {
+    display: block;
+    width: 10px; /* Width of the checkmark */
+    height: 10px; /* Height of the checkmark */
+    border: 2px solid #ffffff; /* White checkmark */
+    border-left: 0;
+    border-top: 0;
+    transform: rotate(45deg); /* Rotate to form a checkmark */
+    position: relative;
+    top: 1px; /* Adjust to center the checkmark */
+    left: 1px; /* Adjust to center the checkmark */
+}
+
+/* Show the checkbox when hovering over the frame */
+.frame:hover .checkbox {
+    display: flex; /* Show the checkbox on hover */
+}
+
+/* Override for any additional styles */
+.frame {
+    background: #f0f0f0; /* Background color for the frame */
+}
+
+/* Popup Content (additional styles) */
+#popup-content select, #popup-content button {
+    font-weight: 600; /* Make text bold */
+}

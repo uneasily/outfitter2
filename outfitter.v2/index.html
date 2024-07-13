@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random Outfit Generator</title>
+    <link rel="stylesheet" href="styles.css">
+    <!-- Font Awesome CDN for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts CDN for Inter font -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
+</head>
+<body>
+    <!-- Preloader -->
+    <div id="preloader">
+        <div id="progress-bar"></div>
+    </div>
+
+    <!-- Main Content -->
+    <div id="mainframe">
+        <div id="sidebar">
+            <!-- Add icons to buttons -->
+            <button class="sidebar-button" id="add_clothes" title="Add Clothes">
+                <i class="fa-solid fa-plus"></i>
+            </button>
+            <button class="sidebar-button" id="randomize_outfit" title="Randomize Outfit">
+                <i class="fa-solid fa-random"></i>
+            </button>
+            <button class="sidebar-button" id="save_outfit" title="Save Outfit">
+                <i class="fa-solid fa-save"></i>
+            </button>
+            <button class="sidebar-button" id="load_outfit" title="Load Outfit">
+                <i class="fa-solid fa-upload"></i>
+            </button>
+            <button class="sidebar-button" id="settings" title="Settings">
+                <i class="fa-solid fa-cog"></i>
+            </button>
+        </div>
+        <div id="content-frame"></div> <!-- New content frame -->
+    </div>
+
+    <!-- Popup -->
+    <div id="popup">
+        <div id="topbar">
+            <button id="close-popup" title="Close Popup"></button>
+        </div>
+        <div id="popup-content">
+            <!-- Dropdown Menu -->
+            <select id="dropdown">
+                <option value="" disabled selected>Select an item</option>
+                <option value="shirt">Shirt</option>
+                <option value="jacket">Jacket</option>
+                <option value="pants">Pants</option>
+            </select>
+            <!-- Button -->
+            <button id="popup-button">Submit</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
